@@ -28,8 +28,8 @@ app.get('/todos',(req,res)=>{
         res.send({todos:todos});
     }, (e)=>{
         res.status(400).send(e);
-    })
-})
+    });
+});
 
 
 app.listen(3000,()=>{
