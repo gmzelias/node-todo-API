@@ -72,7 +72,7 @@ app.delete('/todos/:id', (req,res)=>{
         //id doc, send doc back with 200
         //***** */
        // res.status(200).send();
-        res.send(todo);
+        res.send({todo: todo});
     }).catch((e)=>{
         res.status(400).send();
     })
