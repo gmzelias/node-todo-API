@@ -17,6 +17,8 @@ const {ObjectID} = require('mongodb');
 var {Todo} =   require('./models/todo.js');
 var {User} =   require('./models/users.js');
 
+var {authenticate} = require ('./middleware/authenticate');
+
 var app = express();
 
 const port = process.env.PORT || 3000;
@@ -130,6 +132,21 @@ app.post('/users',(req,res)=>{
     res.status(400).send(e);
     });
 });
+
+
+app.get('/users/me',authenticate,(req,res)=>{
+  /*  var token = req.header('x-auth');
+
+    User.findByToken(token).then((user)=>{
+        if (!user){
+            return Promise.reject(); // this promise rejects runs the exact way that the promise returning from users.js and runs line 142
+        }
+        res.send(user);
+    }).catch((e)=>{
+        res.status(401).send();
+    });*/
+res.send(req.user);
+})
 
 
 
