@@ -146,7 +146,24 @@ app.get('/users/me',authenticate,(req,res)=>{
         res.status(401).send();
     });*/
 res.send(req.user);
+});
+
+// POST /users/login {email, password}
+
+app.post('/users/login', (req,res)=>{
+    var body= _.pick(req.body,['email','password']);
+    //res.send(body); content received in postman
+    User.findByCredentials(body.email, body.password).then((user)=>{
+       user.generateAuthToken().then((token)=>{
+        res.header('x-auth',token).send(user);
+       })
+    }).catch((err)=>{
+        res.status(400).send();
+    });
+    //
 })
+
+
 
 
 
