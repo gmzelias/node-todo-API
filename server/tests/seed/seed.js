@@ -19,17 +19,23 @@ tokens:[{
 _id : userTwoId,
 email: 'jen@gmail.com',
 password:'CaiCuid2',
+tokens:[{
+    access:'auth',
+    token:jwt.sign({_id:userTwoId,access:'auth'}, 'abc123').toString()
+}]
 }];
 
 
 const todos = [{
     _id: new ObjectID(),
-    text:'First text todo'
+    text:'First text todo',
+    _creator: userOneId
 },{
     _id: new ObjectID(),
     text : 'Second text todo',
     completed: true,
-    completedAt: 0623
+    completedAt: 0623,
+    _creator: userTwoId
 }];
 
 const populateTodos = (done)=>{
